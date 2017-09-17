@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>What genre?</title>
+<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arvo', serif;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 1.5rem;
+}
+
+h2 {
+  margin: 1rem;
+}
+.color1{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.color2 {
+  mix-blend-mode: lighten;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+}
+.top {
+  z-index: 4;
+  padding: 10%;
+}
+
+.image {
+  background-size: cover;
+  background-position-y: center;
+  background-position-x: center;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1);
+  width: 100%;
+  height: 100%;
+}
+
+.input-field {
+  padding: 0;
+
+}
+
+.input-field input {
+  background-color: white;
+  height: 30px;
+  width: 200px;
+  border: none;
+}
+
+.input-field button {
+  background-color: white;
+  height: 30px;
+  width: 100px;
+  border: none;
+}
+</style>
+</head>
+<body>
+    <div class="top">
+      <center>
+        <h1>What's <% if $input.empty?%>
+          this artist's
+          <% else %>
+          <%=$input %>'s
+          <% end %>
+          genre?
+        </h1>
+        <div class="input-field">
+          <form action='/' method='post'>
+            Artist: <input name='artist'>
+            <button type='submit'>Clickity click!</button>
+          </form>
+        </div>
+        <div>
+          <% if !$input.empty?%>
+            <h2>According to Spotify,
+            <%=$input %>'s genres are:</h2>
+            <% end %>
+        <%= if !$input.empty?
+          $genres.map { |genre|
+          "<p> #{genre} </p>"}.join("")
+            else
+          end
+          %>
+        </div>
+      </center>
+    </div>
+  <%= tag(:div, :class => 'color1', :style => "background-color: #{@color1};") %>
+  <%= tag(:div, :class => 'color2', :style => "background-color: #{@color2};") %></div>
+  <%= tag(:div, :class => 'image', :style => "background-image: url(#{$image});") %></div>
+</body>
+</html>

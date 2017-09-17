@@ -6,9 +6,9 @@ RSpotify.authenticate(ENV['clientid'], ENV['clientsecret'])
 $input = ""
 
 get "/" do
-  #  if $input.empty?
-  #    $image = "image1.jpg"
-  #  end
+   if $input.empty?
+     $image = "image1.jpg"
+   end
   backgroundcolor
   erb :index
 end

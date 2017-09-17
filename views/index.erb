@@ -19,12 +19,6 @@ body {
   font-family: 'Arvo', serif;
   background-color: black;
   color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 h1 {
@@ -35,6 +29,16 @@ h1 {
 h2 {
   margin: 1rem;
 }
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .color1{
   margin: 0;
   padding: 0;
@@ -75,20 +79,29 @@ h2 {
 
 .input-field input {
   background-color: white;
-  height: 30px;
-  width: 200px;
+  height: 50px;
+  width: 220px;
   border: none;
+  font-size: 1.4rem;
+  text-align: center;
+  font-family: 'Arvo', serif;
+  border-radius:3px;
+  margin: 10px;
 }
 
 .input-field button {
   background-color: white;
   height: 30px;
-  width: 100px;
+  width: 120px;
   border: none;
+  font-family: 'Arvo', serif;
+  border-radius:3px;
+  font-size: 0.8rem;
+  color: grey;
 }
 </style>
 </head>
-<body>
+<body class="flex">
   <div class="top">
     <center>
       <h1>What's <% if @input.empty?%>
@@ -100,8 +113,8 @@ h2 {
       </h1>
       <div class="input-field">
         <form action='/' method='post'>
-          Artist: <input name='artist'>
-          <button type='submit'>Clickity click!</button>
+          <div><input name='artist' placeholder="artist"></div>
+          <div><button type='submit'>Clickity Click!</button></div>
         </form>
       </div>
       <div>
@@ -109,6 +122,7 @@ h2 {
           <h2>According to Spotify,
           <%=@input %>'s genres are:</h2>
           <% end %>
+
       <%= if !@input.empty?
         @genres.map { |genre|
         "<p> #{genre} </p>"}.join("")

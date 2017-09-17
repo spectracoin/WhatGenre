@@ -10,6 +10,11 @@
   padding: 0;
 }
 
+html {
+  width: 0;
+  height: 0;
+}
+
 body {
   font-family: 'Arvo', serif;
   background-color: black;
@@ -46,8 +51,11 @@ h2 {
   z-index: 3;
 }
 .top {
-  z-index: 4;
-  padding: 10%;
+  z-index: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .image {
@@ -63,7 +71,6 @@ h2 {
 
 .input-field {
   padding: 0;
-
 }
 
 .input-field input {
@@ -82,35 +89,35 @@ h2 {
 </style>
 </head>
 <body>
-    <div class="top">
-      <center>
-        <h1>What's <% if @input.empty?%>
-          this artist's
-          <% else %>
-          <%=@input %>'s
+  <div class="top">
+    <center>
+      <h1>What's <% if @input.empty?%>
+        this artist's
+        <% else %>
+        <%=@input %>'s
+        <% end %>
+        genre?
+      </h1>
+      <div class="input-field">
+        <form action='/' method='post'>
+          Artist: <input name='artist'>
+          <button type='submit'>Clickity click!</button>
+        </form>
+      </div>
+      <div>
+        <% if !@input.empty?%>
+          <h2>According to Spotify,
+          <%=@input %>'s genres are:</h2>
           <% end %>
-          genre?
-        </h1>
-        <div class="input-field">
-          <form action='/' method='post'>
-            Artist: <input name='artist'>
-            <button type='submit'>Clickity click!</button>
-          </form>
-        </div>
-        <div>
-          <% if !@input.empty?%>
-            <h2>According to Spotify,
-            <%=@input %>'s genres are:</h2>
-            <% end %>
-        <%= if !@input.empty?
-          @genres.map { |genre|
-          "<p> #{genre} </p>"}.join("")
-            else
-          end
-          %>
-        </div>
-      </center>
-    </div>
+      <%= if !@input.empty?
+        @genres.map { |genre|
+        "<p> #{genre} </p>"}.join("")
+          else
+        end
+        %>
+      </div>
+    </center>
+  </div>
   <%= tag(:div, :class => 'color1', :style => "background-color: #{@color1};") %>
   <%= tag(:div, :class => 'color2', :style => "background-color: #{@color2};") %></div>
   <%= tag(:div, :class => 'image', :style => "background-image: url(#{@image});") %></div>

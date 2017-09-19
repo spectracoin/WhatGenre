@@ -16,22 +16,16 @@ end
 
 def getartist(artist = "")
   @input = artist
-  if @input.empty?
-     @image = "image1.jpg"
-  else
+  @image = "image1.jpg"
+  unless @input.empty?
     @artist = RSpotify::Artist.search(@input).first
     @check = false
-    @image = "image1.jpg"
-    if @artist != nil
-      if @artist.genres != []
-        @check = true
-        @genres = @artist.genres
-        if @artist.images != []
+    unless @artist.nil?|| @artist.genres.empty?
+      @check = true
+      @genres = @artist.genres
+        unless @artist.images.empty?
           @image = @artist.images.first["url"]
-        else
-          @image = "image1.jpg"
         end
-      end
     end
   end
   backgroundcolor

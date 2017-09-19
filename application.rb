@@ -19,10 +19,20 @@ def getartist(artist = "")
   if @input.empty?
      @image = "image1.jpg"
   else
-    @search = RSpotify::Artist.search(@input)
-    @artist = @search.first
-    @genres = @artist.genres
-    @image = @artist.images.first["url"]
+    begin
+      @search = RSpotify::Artist.search(@input)
+      @artist = @search.first
+      @genres = @artist.genres
+    rescue
+      puts "NOOOOOOO"
+      @check = false
+      @image = "image1.jpg"
+    else
+      puts "yasss"
+      @check = true
+      @image = @artist.images.first["url"]
+      puts @check.inspect
+    end
   end
   backgroundcolor
   erb :index

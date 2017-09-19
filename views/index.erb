@@ -96,7 +96,7 @@ h2 {
 <body>
   <div class="top">
     <center>
-      <h1>What's <% if @input.empty?%>
+      <h1>What's <% if @check == false %>
         this artist's
         <% else %>
         <%=@input %>'s
@@ -110,12 +110,15 @@ h2 {
         </form>
       </div>
       <div>
-        <% if !@input.empty?%>
+        <% if @check == true %>
           <h2>According to Spotify,
           <%=@input %>'s genres are:</h2>
           <% end %>
+        <% if @check == false %>
+          <h2>Oops, maybe try again?</h2>
+          <% end %>
 
-      <%= if !@input.empty?
+      <%= if @check == true
         @genres.map { |genre|
         "<p> #{genre} </p>"}.join("")
           else

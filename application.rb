@@ -20,8 +20,6 @@ def getartist(artist = "")
      @image = "image1.jpg"
   else
     @artist = RSpotify::Artist.search(@input).first
-    puts @input.inspect
-    puts @artist.inspect
     @check = false
     @image = "image1.jpg"
     if @artist != nil

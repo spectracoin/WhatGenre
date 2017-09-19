@@ -96,7 +96,7 @@ h2 {
 <body>
   <div class="top">
     <center>
-      <h1>What's <% if @check == false %>
+      <h1>What's <% if @input.empty? || @check == false %>
         this artist's
         <% else %>
         <%=@input %>'s

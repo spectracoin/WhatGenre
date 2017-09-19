@@ -18,13 +18,14 @@ def getartist(artist = "")
   @input = artist
   if @input.empty?
      @image = "image1.jpg"
-
   else
     @artist = RSpotify::Artist.search(@input).first
+    puts @input.inspect
+    puts @artist.inspect
+    @check = false
+    @image = "image1.jpg"
     if @artist != nil
       if @artist.genres != []
-        puts @check.inspect
-        puts @genres.inspect
         @check = true
         @genres = @artist.genres
         if @artist.images != []
@@ -32,10 +33,6 @@ def getartist(artist = "")
         else
           @image = "image1.jpg"
         end
-      else
-        @check = false
-        puts @check.inspect
-        @image = "image1.jpg"
       end
     end
   end

@@ -3,6 +3,7 @@
   <head>
     <title>What genre?</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -31,8 +32,9 @@
         end %>
       </div>
     </div>
-    <%= tag(:div, :class => 'color1', :style => "background-color: #{@color1};") %>
-    <%= tag(:div, :class => 'color2', :style => "background-color: #{@color2};") %></div>
-    <%= tag(:div, :class => 'image', :style => "background-image: url(#{@image});") %></div>
+    <div class="color1" style="background-color: <%= @color1 %>;">
+      <div class="color2" style="background-color: <%= @color2 %>;"></div>
+      <div class="image" style="background-image: url(<%= @image %>)"></div>
+    </div>
   </body>
 </html>

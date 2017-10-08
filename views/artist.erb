@@ -26,7 +26,7 @@
       <div class="top flex-container">
         <div class="flex-item">
           <%= if @check == true
-            @genres.map { |genre| "<button type='submit'>#{genre}</button>"}.join("")
+            @genres.map { |genre| "<form action='/genre?genre=#{genre}&artist=#{@input}#third' method='post'><button type='submit'>#{genre}</button></form>"}.join("")
           end %>
         </div>
         <div class="flex-item">
@@ -40,9 +40,5 @@
         <div class="image" style="background-image: url(<%= @image %>)"></div>
       </div>
     </section>
-
-
-      <!--  -->
-    </div>
   </body>
 </html>

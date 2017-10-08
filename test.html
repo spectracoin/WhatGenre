@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What genre?</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: pink;
+  }
+  nav {
+    background-color: black;
+    height: 10vh;
+    min-height: 60px;
+  }
+
+  .gradient {
+    background: red; /* For browsers that do not support gradients */
+    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+  }
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    align-content: flex-start;
+    width: 98,9vw;
+    height: 100vh;
+  }
+
+  .top-container {
+    height: 90vh;
+  }
+
+  .flex-item {
+    flex: 1 500px;
+    color: white;
+    background-color:black;
+    margin: 10px;
+  }
+  .search-flex {
+    flex: 2 100%;
+    height: 50px;
+  }
+  .red {
+    background-color: red;
+  }
+  </style>
+  <body>
+    <nav>
+      lala
+    </nav>
+    <div class="flex-container gradient top-container">
+      <div class="flex-item search-flex">
+        <h1>What's <% if @input.empty? || @check == false %>this artist's
+          <% else %>
+          <%=@input %>'s
+          <% end %>
+          genre?
+        </h1>
+        <div class="input-field">
+          <form action='/' method='post'>
+            <div><input name='artist' placeholder="artist"></div>
+            <div><button type='submit'>Clickity Click!</button></div>
+          </form>
+        </div>
+      </div>
+      <div class="flex-item">
+        <div class="color1" style="background-color: <%= @color1 %>;">
+          <div class="color2" style="background-color: <%= @color2 %>;"></div>
+          <div class="image" style="background-image: url(<%= @image %>)"></div>
+        </div>
+      </div>
+      <div class="flex-item">
+        <% if @check == true %>
+        <h2>According to Spotify, <%=@input %>'s genres are:</h2>
+        <% elsif @check == false %>
+        <h2>Oops, maybe try again?</h2>
+        <% end %>
+        <%= if @check == true
+          @genres.map { |genre| "<p> #{genre} </p>"}.join("")
+        end %>
+      </div>
+    </div>
+  </body>
+</html>

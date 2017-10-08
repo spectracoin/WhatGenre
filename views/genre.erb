@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>What genre?</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1%>,<%= @color2%>);">
+    <nav>
+      <div class="navbar-logo"><h1>| What genre?</h1></div>
+    </nav>
+    <div class="flex-container top-container">
+      <div class="flex-item search-flex">
+        <h1>What's <% if @input.empty? || @check == false %>this artist's
+          <% else %>
+          <%=@input %>'s
+          <% end %>
+          genre?
+        </h1>
+        <div class="input-field">
+          <form action='/' method='post'>
+            <div><input name='artist' placeholder="artist"></div>
+            <div><button type='submit'>Clickity Click!</button></div>
+          </form>
+        </div>
+      </div>
+      <div class="flex-item">
+        <div class="color1" style="background-color: <%= @color1 %>;">
+          <div class="color2" style="background-color: <%= @color2 %>;"></div>
+          <div class="image" style="background-image: url(<%= @image %>)"></div>
+        </div>
+      </div>
+      <div class="flex-item">
+        <% if @check == true %>
+        <h2>According to Spotify, <%=@input %>'s genres are:</h2>
+        <% elsif @check == false %>
+        <h2>Oops, maybe try again?</h2>
+        <% end %>
+        <%= if @check == true
+          @genres.map { |genre| "<p> #{genre} </p>"}.join("")
+        end %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -28,7 +28,7 @@ def getartist(artist = "")
   unless @input.empty?
     @artist = RSpotify::Artist.search(@input).first
     @check = false
-    unless @artist.nil?|| @artist.genres.empty?
+    unless @artist.nil? || @artist.genres.empty?
       @check = true
       @genres = @artist.genres
         unless @artist.images.empty?
@@ -36,17 +36,19 @@ def getartist(artist = "")
         end
     end
   end
-  if @check == false
-    redirect('/')
-  end
 end
 
 post "/artist" do
-  puts params["artist"]
   if !params["artist"].empty?
     getartist params["artist"]
-    backgroundcolor
-    erb :artist
+    if @check == false
+      @tryagain = true
+      backgroundcolor
+      erb :index
+    else
+      backgroundcolor
+      erb :artist
+    end
   else
     backgroundcolor
     erb :index

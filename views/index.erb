@@ -9,7 +9,7 @@
   </head>
   <body>
     <nav>
-      <div class="navbar-logo"><h1>| What genre?</h1></div>
+      <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a>
     </nav>
     <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1%>,<%= @color2%>);">
       <!-- first block div -->
@@ -17,6 +17,11 @@
         <h3>Start browsing</h3><h1>your music taste.</h1><h2>What's your favourite artist's genre?</h2>
       </div>
       <div class="flex-item search-block">
+        <% if @tryagain == true %>
+          <p>Oops! We couldn't find a genre for this artist in Spotify's database!</p>
+        <% else %>
+        <br>
+        <% end %>
         <form action='/artist#artist' method='post'>
           <input name='artist' placeholder="Type artist's name"><button type='submit'>CLICK!</button>
         </form>

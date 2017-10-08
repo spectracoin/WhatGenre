@@ -5,7 +5,8 @@ require 'sinatra/static_assets'
 RSpotify.authenticate(ENV['clientid'], ENV['clientsecret'])
 
 get "/" do
-  getartist
+  backgroundcolor
+  erb :index
 end
 
 def backgroundcolor
@@ -28,10 +29,19 @@ def getartist(artist = "")
         end
     end
   end
-  backgroundcolor
-  erb :index
+  if @check == false
+    redirect('/')
+  end
 end
 
-post "/" do
-  getartist params["artist"]
+post "/artist" do
+  puts params["artist"]
+  if !params["artist"].empty?
+    getartist params["artist"]
+    backgroundcolor
+    erb :artist
+  else
+    backgroundcolor
+    erb :index
+  end
 end

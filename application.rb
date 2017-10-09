@@ -10,10 +10,8 @@ get "/" do
 end
 
 post "/genre" do
-  puts "hoi"
   getgenre params["artist"]
   getartists params["genre"]
-  puts @genres.inspect
   backgroundcolor
   erb :genre
 end
@@ -43,8 +41,6 @@ def getartists(genre = "")
     name = artist.name
     @artists.push(name)
   end
-  puts "YAAAAAASS"
-  puts @artists.inspect
 end
 
 def getgenre(artist = "")
@@ -52,6 +48,7 @@ def getgenre(artist = "")
   @image = "image1.jpg"
   unless @input.empty?
     @artist = RSpotify::Artist.search(@input).first
+    @id = @artist.id
     @check = false
     unless @artist.nil? || @artist.genres.empty?
       @check = true

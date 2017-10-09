@@ -38,6 +38,11 @@ end
 def getartists(genre = "")
   @artists = Array.new
   @genre = genre
+  puts @genre
+  if @genre.include? ' '
+    @genre.tr_s!(' ', '')
+  end
+  puts @genre
   @output = RSpotify::Artist.search("genre:#{@genre}")
   @output.each do |artist|
     name = artist.name

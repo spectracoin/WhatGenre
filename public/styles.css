@@ -109,7 +109,7 @@ nav h1 {
           align-items: center;
 }
 
-#artist {
+#genres {
   padding: 15vh 9vw;
   height: 100vh;
   width: 100%;
@@ -121,18 +121,18 @@ nav h1 {
   position: relative;
 }
 
-#artist .flex-item {
+#genres .flex-item {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 300px;
           flex: 1 1 300px;
   padding: 5vh 9vw;
 }
 
-#artist .flex-item h1 {
+#genres .flex-item h1 {
   line-height: 5.6rem;
 }
 
-#artist button {
+#genres button {
   background-color: transparent;
   border: 2px solid white;
   padding: 21px 26px 19px;
@@ -140,14 +140,14 @@ nav h1 {
   margin: 5px;
 }
 
-#third {
+#related {
   padding: 15vh 9vw;
   height: 100vh;
   width: 100%;
   background-color: black;
 }
 
-#third button {
+#related button {
   padding: 20px 60px 20px;
   min-width: 20px;
   max-height: 60px;
@@ -155,7 +155,7 @@ nav h1 {
   position: relative;
 }
 
-#third h3 {
+#related h3 {
   margin-left: 10px;
 }
 /* Main Styles -------------------- */

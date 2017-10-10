@@ -2,6 +2,7 @@ require "sinatra"
 require 'rspotify'
 require 'sinatra/static_assets'
 
+# Authentification for Spotify API.
 RSpotify.authenticate(ENV['clientid'], ENV['clientsecret'])
 
 get "/" do
@@ -9,23 +10,16 @@ get "/" do
   erb :index
 end
 
-post "/genre" do
-  getgenre params["artist"]
-  getartists params["genre"]
-  backgroundcolor
-  erb :genre
-end
-
-post "/artist" do
+post "/genres" do
   if !params["artist"].empty?
-    getgenre params["artist"]
+    getgenres params["artist"]
     if @check == false
       @tryagain = true
       backgroundcolor
       erb :index
     else
       backgroundcolor
-      erb :artist
+      erb :genres
     end
   else
     backgroundcolor
@@ -33,30 +27,41 @@ post "/artist" do
   end
 end
 
-def getartists(genre = "")
-  @artists = Array.new
-  @genre = "\"#{genre}\""
-  @output = RSpotify::Artist.search("genre:#{@genre}")
-  @output.each do |artist|
-    name = artist.name
-    @artists.push(name)
+post "/related" do
+  getgenres params["artist"]
+  relatedartists params["genre"]
+  backgroundcolor
+  erb :related #was genre
+end
+
+def getgenres(artist = "")
+  @image = "image1.jpg"
+  @artistInput = artist
+  puts @artistInput
+  unless @artistInput.empty?
+    artistInfo = RSpotify::Artist.search(@artistInput).first
+    puts artistInfo
+    @id = artistInfo.id
+    puts @id
+    @check = false
+    unless artistInfo.nil? || artistInfo.genres.empty?
+      puts  "went through"
+      @check = true
+      @genres = artistInfo.genres
+        unless artistInfo.images.empty?
+          @image = artistInfo.images.first["url"]
+        end
+    end
   end
 end
 
-def getgenre(artist = "")
-  @input = artist
-  @image = "image1.jpg"
-  unless @input.empty?
-    @artist = RSpotify::Artist.search(@input).first
-    @id = @artist.id
-    @check = false
-    unless @artist.nil? || @artist.genres.empty?
-      @check = true
-      @genres = @artist.genres
-        unless @artist.images.empty?
-          @image = @artist.images.first["url"]
-        end
-    end
+def relatedartists(genre = "")
+  @related = Array.new
+  @genre = "\"#{genre}\""
+  genreSearch = RSpotify::Artist.search("genre:#{@genre}")
+  genreSearch.each do |artist|
+    name = artist.name
+    @related.push(name)
   end
 end
 

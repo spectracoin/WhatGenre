@@ -9,19 +9,22 @@
           box-sizing: border-box;
   color: white;
 }
+body {
+  background-color: black;
+}
 
 h1 {
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 400;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -40,7 +43,7 @@ input {
 
 button {
   border-radius: 500px;
-  padding: 21px 56px 19px;
+  padding: 11px 36px 9px;
   border: none;
   min-width: 40px;
   font-size: 1rem;
@@ -57,23 +60,24 @@ form {
 /* Nav Styles -------------------- */
 
 nav {
-  height: 10vh;
+  height: 11vh;
+  padding: 3vh 9vw;
   min-height: 60px;
-  padding: 0 9vw;
+  width: 100%;
   position: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 6;
 }
 
 nav h1 {
   display: inline-block;
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 .navbar-logo {
   width: 500px;
   height: 40px;
-  margin: 20px;
 }
 
 /* Flex Styles -------------------- */
@@ -94,7 +98,6 @@ nav h1 {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 500px;
           flex: 1 1 500px;
-  margin: 10px;
   color: black;
 }
 
@@ -110,8 +113,8 @@ nav h1 {
 }
 
 #genres {
-  padding: 15vh 9vw;
-  height: 100vh;
+  padding: 25vh 9vw;
+  height: 130vh;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -135,7 +138,7 @@ nav h1 {
 #genres button {
   background-color: transparent;
   border: 2px solid white;
-  padding: 21px 26px 19px;
+  padding: 11px 36px 9px;
   min-width: 30px;
   margin: 5px;
 }
@@ -148,9 +151,9 @@ nav h1 {
 }
 
 #related button {
-  padding: 20px 60px 20px;
+  padding: 11px 36px 9px;
   min-width: 20px;
-  max-height: 60px;
+  max-height: 50px;
   display: inline;
   position: relative;
 }
@@ -168,20 +171,19 @@ nav h1 {
 .search-block p {
   font-size: 0.8rem;
   color: #666;
-
 }
 
 .color1{
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 130vh;
   z-index: 1;
 }
 
 .color2 {
   mix-blend-mode: lighten;
   width: 100%;
-  height: 100vh;
+  height: 130vh;
   position: absolute;
   z-index: 3;
 }
@@ -201,5 +203,30 @@ nav h1 {
   -webkit-filter: grayscale(100%) contrast(1);
           filter: grayscale(100%) contrast(1);
   width: 100%;
-  height: 100vh;
+  height: 130vh;
+}
+
+@media (min-width: 800px) {
+  h1 {
+    font-size: 6rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+
+  button {
+    border-radius: 500px;
+    padding: 21px 56px 19px;
+    border: none;
+    min-width: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 2px;
+    margin: 10px;
+  }
 }

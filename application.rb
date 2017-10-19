@@ -35,6 +35,7 @@ end
 def getgenres(artist = "")
   @check = false
   @artist = RSpotify::Artist.search(artist).first
+  puts @artist.inspect
   unless @artist.nil? || @artist.genres.empty?
     @check = true
     getimage

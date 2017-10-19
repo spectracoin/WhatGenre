@@ -9,23 +9,15 @@ get "/" do
   erb :index
 end
 
-post "/genre" do
-  getgenre params["artist"]
-  getartists params["genre"]
-  backgroundcolor
-  erb :genre
-end
-
-post "/artist" do
+post "/genres" do
   if !params["artist"].empty?
-    getgenre params["artist"]
+    getgenres params["artist"]
     if @check == false
-      @tryagain = true
       backgroundcolor
       erb :index
     else
       backgroundcolor
-      erb :artist
+      erb :genres
     end
   else
     backgroundcolor
@@ -33,35 +25,43 @@ post "/artist" do
   end
 end
 
-def getartists(genre = "")
-  @artists = Array.new
-  @genre = "\"#{genre}\""
-  @output = RSpotify::Artist.search("genre:#{@genre}")
-  @output.each do |artist|
-    name = artist.name
-    @artists.push(name)
+post "/related" do
+  getgenres params["artist"]
+  relatedartists params["genre"]
+  backgroundcolor
+  erb :related #was genre
+end
+
+def getgenres(artist = "")
+  @check = false
+  @artist = RSpotify::Artist.search(artist).first
+  puts @artist.inspect
+  unless @artist.nil? || @artist.genres.empty?
+    @check = true
+    getimage
   end
 end
 
-def getgenre(artist = "")
-  @input = artist
-  @image = "image1.jpg"
-  unless @input.empty?
-    @artist = RSpotify::Artist.search(@input).first
-    @id = @artist.id
-    @check = false
-    unless @artist.nil? || @artist.genres.empty?
-      @check = true
-      @genres = @artist.genres
-        unless @artist.images.empty?
-          @image = @artist.images.first["url"]
-        end
-    end
+def relatedartists(genre = "")
+  @related = Array.new
+  @genre = "\"#{genre}\""
+  genreSearch = RSpotify::Artist.search("genre:#{@genre}")
+  genreSearch.each do |artist|
+    name = artist.name
+    @related.push(name)
+  end
+end
+
+def getimage
+  if @artist.images.empty?
+    @image = "image1.jpg"
+  else
+    @image = @artist.images.first["url"]
   end
 end
 
 def backgroundcolor
   colors = {
     "#E50914" => "#282581", "#FF0000" => "#0A0D44", "#00FF8F" => "#0A00A4", "#FFF300" => "#E80000", "#00E8C5" => "#5A009C", "#FF9E00" => "#5A009C", "#FFEC00" => "#FF00A6", "#51FF00" => "#7400BF"}
-  @color1, @color2  = colors.to_a.sample
-end
+    @color1, @color2  = colors.to_a.sample
+  end

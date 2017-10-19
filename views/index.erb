@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>What genre?</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <nav>
-      <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a>
-    </nav>
-    <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1%>,<%= @color2%>);">
-      <!-- first block div -->
-      <div class="flex-item welcome-message">
-        <h3>Start browsing</h3><h1>your music taste.</h1><h2>What's your favourite artist's genre?</h2>
-      </div>
-      <div class="flex-item search-block">
-        <% if @tryagain == true %>
-          <p>Oops! We couldn't find a genre for this artist in Spotify's database!</p>
-        <% else %>
-        <br>
-        <% end %>
-        <form action='/artist#artist' method='post'>
-          <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= @color1%>;" type='submit'>CLICK!</button>
-        </form>
-      </div>
-    </section>
-  </body>
+<head>
+  <title>What genre?</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <nav>
+    <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a>
+  </nav>
+  <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1 %>,<%= @color2 %>);">
+    <div class="flex-item welcome-message">
+      <h3>Start browsing</h3><h1>your music taste.</h1><h2>What's your favourite artist's genre?</h2>
+    </div>
+    <div class="flex-item search-block">
+      <% if @check == false %>
+      <p>Oops! We couldn't find a genre for this artist in Spotify's database!</p>
+      <% else %>
+      <br>
+      <% end %>
+      <form action='/genres#genres' method='post'>
+        <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= @color1 %>;" type='submit'>CLICK!</button>
+      </form>
+    </div>
+  </section>
+</body>
 </html>

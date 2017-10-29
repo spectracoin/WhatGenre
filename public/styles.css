@@ -14,17 +14,17 @@ body {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 400;
 }
 
 h2 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 300;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 300;
 }
 
@@ -60,12 +60,11 @@ form {
 /* Nav Styles -------------------- */
 
 nav {
-  height: 11vh;
+  height: 10vh;
   padding: 3vh 9vw;
   min-height: 60px;
   width: 100%;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.1);
   z-index: 6;
 }
 
@@ -73,6 +72,11 @@ nav h1 {
   display: inline-block;
   color: white;
   font-size: 1.8rem;
+}
+
+nav p{
+  font-size: 0.8rem;
+  padding: 10px;
 }
 
 .navbar-logo {
@@ -105,7 +109,7 @@ nav h1 {
 
 #first-section {
   padding: 15vh 9vw;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -113,8 +117,9 @@ nav h1 {
 }
 
 #genres {
-  padding: 25vh 9vw;
-  height: 130vh;
+  padding: 10vh 9vw 0;
+  min-height: 100vh;
+  height: auto;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -128,11 +133,11 @@ nav h1 {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 300px;
           flex: 1 1 300px;
-  padding: 5vh 9vw;
+  padding: 0vh 9vw;
 }
 
 #genres .flex-item h1 {
-  line-height: 5.6rem;
+  line-height: 4rem;
 }
 
 #genres button {
@@ -144,8 +149,9 @@ nav h1 {
 }
 
 #related {
-  padding: 15vh 9vw;
-  height: 100vh;
+  padding: 15vh 9vw 0;
+  min-height: 100vh;
+  height: auto;
   width: 100%;
   background-color: black;
 }
@@ -163,6 +169,18 @@ nav h1 {
 }
 /* Main Styles -------------------- */
 
+.genres-list {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.artist-info {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
 .search-block {
   text-align: center;
   padding-top: 1vh;
@@ -176,14 +194,16 @@ nav h1 {
 .color1{
   position: absolute;
   width: 100%;
-  height: 130vh;
+  min-height: 100vh;
+  height: auto;
   z-index: 1;
 }
 
 .color2 {
   mix-blend-mode: lighten;
   width: 100%;
-  height: 130vh;
+  min-height: 100vh;
+  height: auto;
   position: absolute;
   z-index: 3;
 }
@@ -203,7 +223,8 @@ nav h1 {
   -webkit-filter: grayscale(100%) contrast(1);
           filter: grayscale(100%) contrast(1);
   width: 100%;
-  height: 130vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 @media (min-width: 800px) {
@@ -229,4 +250,11 @@ nav h1 {
     letter-spacing: 2px;
     margin: 10px;
   }
+  .genres-list,
+  .artist-info {
+    -webkit-box-ordinal-group: 1;
+        -ms-flex-order: 0;
+            order: 0;
+  }
+
 }

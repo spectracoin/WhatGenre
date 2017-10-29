@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -26,5 +27,14 @@
       </form>
     </div>
   </section>
+  <script>
+  $(window).scroll(function () {
+    if ($(window).scrollTop() >= 50) {
+      $('nav').css('background','rgba(0, 0, 0, 0.3)');
+    } else {
+      $('nav').css('background','transparent');
+    }
+  });
+  </script>
 </body>
 </html>

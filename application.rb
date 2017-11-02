@@ -2,6 +2,7 @@ require "sinatra"
 require 'rspotify'
 require 'sinatra/static_assets'
 
+
 RSpotify.authenticate(ENV['clientid'], ENV['clientsecret'])
 
 get "/" do
@@ -35,7 +36,6 @@ end
 def getgenres(artist = "")
   @check = false
   @artist = RSpotify::Artist.search(artist).first
-  puts @artist.inspect
   unless @artist.nil? || @artist.genres.empty?
     @check = true
     getimage

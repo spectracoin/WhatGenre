@@ -10,7 +10,7 @@
 </head>
 <body>
   <nav>
-    <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a>
+    <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a><a href="https://github.com/khendrikse/whatgenre"><p>Check on GitHub</p></a>
   </nav>
   <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1 %>,<%= @color2 %>);">
     <div class="flex-item welcome-message">
@@ -31,7 +31,7 @@
     <div class="top flex-container">
       <div class="flex-item genres-list">
         <%= if @check == true
-          @artist.genres.map { |genre| "<form action='/related?genre=#{genre}&artist=#{@artist.name}#related' method='post'><button type='submit'>#{genre}</button></form>"}.join("")
+          @artist.genres.map { |genre| "<form action='/related?genre=#{CGI.escape (genre)}&artist=#{@artist.name}#related' method='post'><button type='submit'>#{genre}</button></form>"}.join("")
         end %>
       </div>
       <div class="flex-item artist-info">
@@ -47,14 +47,5 @@
       <div class="image" style="background-image: url(<%= @image %>)"></div>
     </div>
   </section>
-  <script>
-  $(window).scroll(function () {
-    if ($(window).scrollTop() >= 50) {
-      $('nav').css('background','rgba(0, 0, 0, 0.3)');
-    } else {
-      $('nav').css('background','transparent');
-    }
-  });
-  </script>
 </body>
 </html>

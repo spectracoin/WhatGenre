@@ -24,7 +24,7 @@ h2 {
 }
 
 h3 {
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   font-weight: 300;
 }
 
@@ -64,7 +64,7 @@ nav {
   padding: 3vh 9vw;
   min-height: 60px;
   width: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 6;
 }
 
@@ -77,10 +77,10 @@ nav h1 {
 nav p{
   font-size: 0.8rem;
   padding: 10px;
+  line-height: 0rem;
 }
 
 .navbar-logo {
-  width: 500px;
   height: 40px;
 }
 
@@ -117,7 +117,6 @@ nav p{
 }
 
 #genres {
-  padding: 10vh 9vw 0;
   min-height: 100vh;
   height: auto;
   width: 100%;
@@ -130,14 +129,14 @@ nav p{
 }
 
 #genres .flex-item {
+  padding: 1vh 9vw;
   -webkit-box-flex: 1;
       -ms-flex: 1 1 300px;
           flex: 1 1 300px;
-  padding: 0vh 9vw;
 }
 
 #genres .flex-item h1 {
-  line-height: 4rem;
+  line-height: 3rem;
 }
 
 #genres button {
@@ -149,11 +148,12 @@ nav p{
 }
 
 #related {
-  padding: 15vh 9vw 0;
+  padding: 1vh 9vw;
   min-height: 100vh;
   height: auto;
   width: 100%;
   background-color: black;
+  position: relative;
 }
 
 #related button {
@@ -173,6 +173,7 @@ nav p{
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
+
 }
 
 .artist-info {
@@ -212,6 +213,8 @@ nav p{
   z-index: 5;
   position: absolute;
   width: 100%;
+  min-height: 100vh;
+  height: auto;
 }
 
 .image {
@@ -256,5 +259,15 @@ nav p{
         -ms-flex-order: 0;
             order: 0;
   }
+  #genres .flex-item{
+    padding: 15vh 9vw;
+  }
 
+  #genres .flex-item h1 {
+    line-height: 6rem;
+  }
+
+  #related {
+    padding: 15vh 9vw;
+  }
 }

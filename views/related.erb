@@ -12,7 +12,7 @@
   <nav>
     <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a><a href="https://github.com/khendrikse/whatgenre"><p>Check on GitHub</p></a>
   </nav>
-  <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1 %>,<%= @color2 %>);">
+  <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= session[:color1] %>,<%= session[:color2] %>);">
     <div class="flex-item welcome-message">
       <h3>Start browsing</h3><h1>your music taste.</h1><h2>What's your favourite artist's genre?</h2>
     </div>
@@ -36,31 +36,23 @@
       </div>
       <div class="flex-item artist-info">
         <h3>These are</h3>
-        <h1><%=@artist.name %>'s genres</h1><br>
+        <h1><%=session[:artist]%>'s genres</h1><br>
         <h2>Click on a genre to find other artists.</h2><br>
-        <iframe src="https://open.spotify.com/embed?uri=spotify:artist:<%= @artist.id %>&view=list" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
-        <iframe src='https://open.spotify.com/follow/1/?uri=spotify:artist:<%= @artist.id %>&size=basic&theme=dark' width="250" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+        <iframe src="https://open.spotify.com/embed?uri=spotify:artist:<%= session[:id] %>&view=list" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+        <iframe src='https://open.spotify.com/follow/1/?uri=spotify:artist:<%= session[:id] %>&size=basic&theme=dark' width="250" height="56" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
       </div>
     </div>
-    <div class="color1" style="background-image:linear-gradient(#000,transparent); background-color: <%= @color1 %>;">
-      <div class="color2" style="background-image:linear-gradient(#000,transparent); background-color: <%= @color2 %>;"></div>
+    <div class="color1" style="background-image:linear-gradient(#000,transparent); background-color: <%= session[:color1] %>;">
+      <div class="color2" style="background-image:linear-gradient(#000,transparent); background-color: <%= session[:color2] %>;"></div>
       <div class="image" style="background-image: url(<%= @image %>)"></div>
     </div>
   </section>
-  <section id="related" class="flex-container" style="background-image:linear-gradient(transparent, #000), linear-gradient(90deg,<%= @color2%>,<%= @color1%>);">
+  <section id="related" class="flex-container" style="background-image:linear-gradient(transparent, #000), linear-gradient(90deg,<%= session[:color2]%>,<%= session[:color1]%>);">
     <div>
       <h3>These artists have the genre <%= @genre %>:</h3><br>
       <%= @related.map { |artist| "<form action='/genres?artist=#{artist}#genres' method='post'><button style='background-color: #000;'>#{artist}</button></form>"}.join("")%>
+      <%= "<form action='/related+playlist?genre=#{CGI.escape(@genre)}&artist=#{@artist.name}#related' method='post'><button style='background-color: #ddd; type='submit'>Create a playlist</button></form>" %>
     </div>
   </section>
-  <script>
-  $(window).scroll(function () {
-    if ($(window).scrollTop() >= 50) {
-      $('nav').css('background','rgba(0, 0, 0, 0.3)');
-    } else {
-      $('nav').css('background','transparent');
-    }
-  });
-  </script>
 </body>
 </html>

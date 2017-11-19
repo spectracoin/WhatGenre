@@ -11,10 +11,8 @@
 <body>
   <nav>
     <a href="/"><div class="navbar-logo"><h1>| What genre?</h1></div></a><a href="https://github.com/khendrikse/whatgenre"><p>Check on GitHub</p></a>
-
-  <a href="/auth" method='post'>Login</a>
   </nav>
-  <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= @color1 %>,<%= @color2 %>);">
+  <section id="first-section" class="flex-container" style="background-image:linear-gradient(transparent,#000), linear-gradient(90deg,<%= session[:color1] %>,<%= session[:color2] %>);">
     <div class="flex-item welcome-message">
       <h3>Start browsing</h3><h1>your music taste.</h1><h2>What's your favourite artist's genre?</h2>
     </div>
@@ -29,14 +27,5 @@
       </form>
     </div>
   </section>
-  <script>
-  $(window).scroll(function () {
-    if ($(window).scrollTop() >= 50) {
-      $('nav').css('background','rgba(0, 0, 0, 0.3)');
-    } else {
-      $('nav').css('background','transparent');
-    }
-  });
-  </script>
 </body>
 </html>

@@ -101,7 +101,7 @@ end
 
 # Asks user to authenticate then redirects back to /callback
 def authorize
-  redirect "https://accounts.spotify.com/authorize/?client_id=#{ENV['clientid']}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost:4567%2Fcallback&scope=playlist-modify-public%20playlist-modify-private%20user-read-private&state=34fFs29kd09"
+  redirect "https://accounts.spotify.com/authorize/?client_id=#{ENV['clientid']}&response_type=code&redirect_uri=http%3A%2F%2Fwhatgenre.herokuapp.com%2Fcallback&scope=playlist-modify-public%20playlist-modify-private%20user-read-private&state=34fFs29kd09"
 end
 
 # Sends code from user to Spotify to return acces_token and refresh_token
@@ -116,7 +116,7 @@ def getToken
   http.use_ssl = true #this helps with the https
 
   request = Net::HTTP::Post.new(uri)
-  request.body = "grant_type=authorization_code&code=#{code}&redirect_uri=http%3A%2F%2Flocalhost:4567%2Fcallback&client_id=#{ENV['clientid']}&client_secret=#{ENV['clientsecret']}"
+  request.body = "grant_type=authorization_code&code=#{code}&redirect_uri=http%3A%2F%2Flwhatgenre.herokuapp.com%2Fcallback&client_id=#{ENV['clientid']}&client_secret=#{ENV['clientsecret']}"
 
   response = http.request(request)
 

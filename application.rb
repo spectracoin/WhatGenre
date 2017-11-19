@@ -57,9 +57,51 @@ get "/callback" do
 end
 
 # ---------- METHODS ---------- #
+# Sets the background color each time it's called
+def backgroundcolor
+  colors = {
+    "#E50914" => "#282581", "#FF0000" => "#0A0D44", "#00FF8F" => "#0A00A4", "#FFF300" => "#E80000", "#00E8C5" => "#5A009C", "#FF9E00" => "#5A009C", "#FFEC00" => "#FF00A6", "#51FF00" => "#7400BF"}
+    color1, color2  = colors.to_a.sample
+    session[:color1] = color1
+    session[:color2] = color2
+  end
+
+# Gets the genres related to this artist
+def getgenres(artist = "")
+  @check = false
+  @artist = RSpotify::Artist.search(artist).first
+  unless @artist.nil? || @artist.genres.empty?
+    session[:artist] = @artist.name
+    session[:id] = @artist.id
+    @check = true
+    getimage
+  end
+end
+
+# Gets the image related to the artists Spotify profile
+  def getimage
+    if @artist.images.empty?
+      @image = "image1.jpg"
+    else
+      @image = @artist.images.first["url"]
+    end
+  end
+
+# Gets the other artists that have this genre
+def relatedartists(genre = "")
+  @related = Array.new
+  @genre = "\"#{genre}\""
+  genreSearch = RSpotify::Artist.search("genre:#{@genre}")
+  genreSearch.each do |artist|
+    name = artist.name
+    @related.push(name)
+  end
+  session[:related] = @related
+end
+
 # Asks user to authenticate then redirects back to /callback
 def authorize
-  redirect "https://accounts.spotify.com/authorize/?client_id=#{ENV['clientid']}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost:4567%2Fcallback&scope=playlist-modify-public%20playlist-modify-private&state=34fFs29kd09"
+  redirect "https://accounts.spotify.com/authorize/?client_id=#{ENV['clientid']}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost:4567%2Fcallback&scope=playlist-modify-public%20playlist-modify-private%20user-read-private&state=34fFs29kd09"
 end
 
 # Sends code from user to Spotify to return acces_token and refresh_token
@@ -98,6 +140,9 @@ def user
   # Converts JSON into ruby hash
   @userData = JSON.parse(response.read_body)
 
+  # Puts user country into session to be able to select the right top songs.
+  @userCountry = @userData["country"]
+
   # Calls on playlist method to create the playlist
   playlist
 end
@@ -111,43 +156,28 @@ def playlist
   request = Net::HTTP::Post.new(uri)
   request["Authorization"] = "Bearer #{@data["access_token"]}"
   request["Content-Type"] = "application/json"
-  request.body = "{\"name\":\"A New Playlist\"}"
+  request.body = "{\"name\":\"#{session[:genre].split.map(&:capitalize).join(' ')} Artists\"}"
   response = http.request(request)
+  @playlistUrl = JSON.parse(response.read_body)["href"]
+  topsongs
 end
 
-def getgenres(artist = "")
-  @check = false
-  @artist = RSpotify::Artist.search(artist).first
-  session[:artist] = @artist.name
-  session[:id] = @artist.id
-  unless @artist.nil? || @artist.genres.empty?
-    @check = true
-    getimage
+# Gets the top songs from the artists related to the given genre => maybe more songs?
+def topsongs
+  tracks = Array.new
+  session[:related].each do |artistName|
+    artist = RSpotify::Artist.search(artistName).first
+    top_tracks = artist.top_tracks(@userCountry).first
+    tracks.push(top_tracks.uri)
   end
-end
 
-def relatedartists(genre = "")
-  @related = Array.new
-  @genre = "\"#{genre}\""
-  genreSearch = RSpotify::Artist.search("genre:#{@genre}")
-  genreSearch.each do |artist|
-    name = artist.name
-    @related.push(name)
-  end
-end
+  uri = URI.parse("#{@playlistUrl}/tracks/")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true #this helps with the https
+  request = Net::HTTP::Post.new(uri)
+  request["Authorization"] = "Bearer #{@data["access_token"]}"
+  request["Content-Type"] = "application/json"
+  request.body = "{\"uris\": #{tracks}}"
+  response = http.request(request)
 
-def getimage
-  if @artist.images.empty?
-    @image = "image1.jpg"
-  else
-    @image = @artist.images.first["url"]
-  end
 end
-
-def backgroundcolor
-  colors = {
-    "#E50914" => "#282581", "#FF0000" => "#0A0D44", "#00FF8F" => "#0A00A4", "#FFF300" => "#E80000", "#00E8C5" => "#5A009C", "#FF9E00" => "#5A009C", "#FFEC00" => "#FF00A6", "#51FF00" => "#7400BF"}
-    color1, color2  = colors.to_a.sample
-    session[:color1] = color1
-    session[:color2] = color2
-  end

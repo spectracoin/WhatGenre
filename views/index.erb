@@ -23,7 +23,7 @@
       <br>
       <% end %>
       <form action='/genres#genres' method='post'>
-        <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= @color1 %>;" type='submit'>CLICK!</button>
+        <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= session[:color1] %>;" type='submit'>CLICK!</button>
       </form>
     </div>
   </section>

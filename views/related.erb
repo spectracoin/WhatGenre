@@ -23,7 +23,7 @@
       <br>
       <% end %>
       <form action='/genres#genres' method='post'>
-        <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= @color1 %>;" type='submit'>CLICK!</button>
+        <input name='artist' placeholder="Type artist's name"><button style="background-color: <%= session[:color1] %>;" type='submit'>CLICK!</button>
       </form>
     </div>
   </section>
@@ -31,7 +31,7 @@
     <div class="top flex-container">
       <div class="flex-item genres-list">
         <%= if @check == true
-          @artist.genres.map { |genre| "<form action='/related?genre=#{CGI.escape (genre)}&artist=#{@artist.name}#related' method='post'><button type='submit'>#{genre}</button></form>"}.join("")
+          @artist.genres.map { |genre| "<form action='/related?genre=#{CGI.escape (genre)}&artist=#{@artist.name}#related' method='post'><button type='submit'>#{genre.split.map(&:capitalize).join(' ')}</button></form>"}.join("")
         end %>
       </div>
       <div class="flex-item artist-info">
@@ -49,9 +49,9 @@
   </section>
   <section id="related" class="flex-container" style="background-image:linear-gradient(transparent, #000), linear-gradient(90deg,<%= session[:color2]%>,<%= session[:color1]%>);">
     <div>
-      <h3>These artists have the genre <%= @genre %>:</h3><br>
-      <%= @related.map { |artist| "<form action='/genres?artist=#{artist}#genres' method='post'><button style='background-color: #000;'>#{artist}</button></form>"}.join("")%>
-      <%= "<form action='/related+playlist?genre=#{CGI.escape(@genre)}&artist=#{@artist.name}#related' method='post'><button style='background-color: #ddd; type='submit'>Create a playlist</button></form>" %>
+      <h3>These artists have the genre <%= session[:genre].split.map(&:capitalize).join(' ') %>:</h3><br>
+      <%= @related.map { |artist| "<form action='/genres?artist=#{artist}#genres' method='post'><button style='background-color: #000;'>#{artist}</button></form>"}.join("")%><br><br>
+      <center><%= "<form action='/related+playlist?genre=#{CGI.escape(@genre)}&artist=#{@artist.name}#related' method='post'><button class='playlist' style='background-color: #{session[:color1]}; min-height: 60px; max-height: 100px; font-weight: 500;' type='submit'>Create a playlist with these artists top tracks</button></form>" %></center>
     </div>
   </section>
 </body>

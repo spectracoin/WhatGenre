@@ -185,5 +185,10 @@ def topsongs
   request["Content-Type"] = "application/json"
   request.body = "{\"uris\": #{tracks}}"
   response = http.request(request)
-
+  finished = JSON.parse(response.read_body)
+  if finished.key?("snapshot_id")
+    @playlistCheck = true
+  else
+    @playlistCheck = false
+  end
 end

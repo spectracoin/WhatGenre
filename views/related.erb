@@ -51,7 +51,12 @@
     <div>
       <h3>These artists have the genre <%= session[:genre].split.map(&:capitalize).join(' ') %>:</h3><br>
       <%= @related.map { |artist| "<form action='/genres?artist=#{artist}#genres' method='post'><button style='background-color: #000;'>#{artist}</button></form>"}.join("")%><br><br>
-      <center><%= "<form action='/related+playlist?genre=#{CGI.escape(@genre)}&artist=#{@artist.name}#related' method='post'><button class='playlist' style='background-color: #{session[:color1]}; min-height: 60px; max-height: 100px; font-weight: 500;' type='submit'>Create a playlist with these artists top tracks</button></form>" %></center>
+      <center><% if @playlistCheck == true %>
+        <br>
+      <h2>Finished creating your playlist, check your Spotify account!</h2>
+      <br>
+      <% end %>
+      <%= "<form action='/related+playlist?genre=#{CGI.escape(@genre)}&artist=#{@artist.name}#related' method='post'><button class='playlist' style='background-color: #{session[:color1]}; min-height: 60px; max-height: 100px; font-weight: 500;' type='submit'>Create a playlist with these artists top tracks</button></form>" %></center>
     </div>
   </section>
 </body>

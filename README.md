@@ -2,6 +2,7 @@
   WhatGenre
 </h1>
 Live version: http://whatgenre.herokuapp.com
+
 This web application uses the Spotify API to find an artist's genre and generates a playlist with top-tracks by artists with the same genre.
 
 ![Screenshot](/docs/screenshot2.png)

@@ -15,8 +15,14 @@ This web application uses the Spotify API to find an artist's genre and generate
 
 ### Prerequisites
 
-This app uses the following:
+Make sure you have Ruby installed:
 * [ruby](https://www.ruby-lang.org/en/documentation/installation/) version: 2.3.1
+
+And run:
+
+      $ bundle
+
+To install the gems that the app depends on:
 * [sinatra](https://rubygems.org/gems/sinatra)
 * [rspotify](https://rubygems.org/gems/rspotify)
 * [rack](https://rubygems.org/gems/rack) version: ~> 2.0, >= 2.0.3
@@ -31,6 +37,12 @@ This app uses a Client ID and Secret Key. These are used as environment variable
 When you have a user account, go to the [My Applications](https://developer.spotify.com/my-applications) page at the [Spotify Developer website](https://developer.spotify.com) and, if necessary, log in. Accept the latest Developer Terms of Use to complete the set-up of your account.
 
 Follow [this Spotify tutorial](https://developer.spotify.com/web-api/tutorial/) to get your Client ID and Secret Key.
+
+Then, to start up the app, in your terminal type:
+
+      $ clientsecret=YOURCLIENTSECRET clientid=YOURCLIENTID ruby application.rb
+
+The app should now be running locally.
 
 ## Built With
 

@@ -3,7 +3,7 @@
 </h1>
 This web application uses the [Spotify API](https://developer.spotify.com/) to find an artist's genre and generates a playlist with top-tracks by artists with the same genre.
 
-![Screenshot](Docs/screenshot2.png)
+![Screenshot](/docs/screenshot2.png)
 
 [See more screenshots](#more-screenshots)
 
@@ -40,7 +40,7 @@ Follow [this Spotify tutorial](https://developer.spotify.com/web-api/tutorial/) 
 * [rspotify](https://rubygems.org/gems/rspotify) - A ruby wrapper for the Spotify Web API.
 
 ## More screenshots
-![Screenshot](Docs/screenshot1.png)
-![Screenshot](Docs/screenshot2.png)
-![Screenshot](Docs/screenshot3.png)
-![Screenshot](Docs/screenshot4.png)
+![Screenshot](/docs/screenshot1.png)
+![Screenshot](/docs/screenshot2.png)
+![Screenshot](/docs/screenshot3.png)
+![Screenshot](/docs/screenshot4.png)

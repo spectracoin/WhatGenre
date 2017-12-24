@@ -162,7 +162,7 @@ def playlist
   request = Net::HTTP::Post.new(uri)
   request["Authorization"] = "Bearer #{@data["access_token"]}"
   request["Content-Type"] = "application/json"
-  request.body = "{\"name\":\"#{session[:genre].split.map(&:capitalize).join(' ')} Artists\"}"
+  request.body = "{\"name\":\"#{session[:genre].split.map(&:capitalize).join(' ')} Artists\", \"description\":\"This playlist was generated with the WhatGenre App. Check it out on: http://whatgenre.herokuapp.com\"}"
   response = http.request(request)
   @playlistUrl = JSON.parse(response.read_body)["href"]
   topsongs

@@ -6,3 +6,4 @@ gem "rack", ">= 2.0.6"
 gem 'sinatra-static-assets', '~> 1.0', '>= 1.0.4'
 gem 'http'
 gem 'json'
+gem 'omniauth-rails_csrf_protection'

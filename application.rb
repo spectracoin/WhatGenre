@@ -8,7 +8,7 @@ require 'json'
 enable :sessions
 
 
-$redirect_uri_base = if development? then "http%3A%2F%2Flocalhost:4567" else "https%3A%2F%2Fwhatgenre.herokuapp.com" end
+$redirect_uri_base = if development? then "http%3A%2F%2Flocalhost:4567" else "https%3A%2F%2Fwhatsyourgenre.herokuapp.com" end
 
 puts $redirect_uri_base
 

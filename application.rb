@@ -14,7 +14,7 @@ puts $redirect_uri_base
 
 
 # Authenticate Spotify API
-RSpotify.authenticate(ENV['1b5e4947effe48559a8297b73dbed574'], ENV['c4154ab9c36e4004961d21f898bbaf39'])
+RSpotify.authenticate(ENV['f2406b64db2241d4b465f0e9d5e1dc75'], ENV['813364fa0bfd4e819abca7119e4dbeba'])
 
 # ---------- ROUTES ---------- #
 # Go to page to enter artist
